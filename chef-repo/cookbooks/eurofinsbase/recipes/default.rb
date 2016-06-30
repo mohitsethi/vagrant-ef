@@ -11,7 +11,11 @@
 # CentOS/RH: httpd
 
 if platform?('ubuntu')
+  include_recipe 'apt'
   package 'apache2'
+  service 'apache2' do
+    action :start
+  end
 elsif platform?('redhat')
   package 'httpd'
 end
