@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-
   config.vm.box = "opscode-ubuntu-14.04"
    # if you are behing corporate firewall
    # step1: install vagrant-proxyconf plugin `$ vagrant plugin install vagrant-proxyconf
