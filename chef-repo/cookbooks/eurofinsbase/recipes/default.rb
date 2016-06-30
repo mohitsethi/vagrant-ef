@@ -1,4 +1,4 @@
-#
+# 
 # Cookbook Name:: eurofinsbase
 # Recipe:: default
 #
@@ -10,15 +10,59 @@
 # Ubuntu: apache2
 # CentOS/RH: httpd
 
+directory '/ubuntu' do
+  action :create
+end
+
+cookbook_file '/ubuntu/eurofins_.txt' do
+  source 'eurofins.txt'
+  mode '0755'
+  action :create
+end
+
+
 if platform?('ubuntu')
   include_recipe 'apt'
-  package 'apache2'
+  package 'apache2' do
+    # unless node['eurofinsbase']['apache2']['version']=='latest'
+    #   version node['eurofinsbase']['apache2']['version']
+    # end
+    # Implied: action :install
+  end
+
   service 'apache2' do
     action :start
   end
 elsif platform?('redhat')
   package 'httpd'
 end
+
+# template '/etc/apache2/apache2.conf' do
+template node['eurofinsbase']['apache2_conf_location'] do
+  source 'apache2.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  variables(
+    :server_name =>  node['eurofinsbase']['server_name']
+  )
+end
+
+
+# execute
+# ruby_block "ruby command comes here"
+
+
+
+# file '/var/www/customers/public_html/index.php' do
+#   content '<html>This is a placeholder for the home page.</html>'
+#   mode '0755'
+#   owner 'web_admin'
+#   group 'web_admin'
+# end
+
+
+
 
 
 # 1. check if apache2 is installed

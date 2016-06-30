@@ -1,0 +1,6 @@
+{
+  "name": "eurofins_base_role",
+  "run_list": [
+    "recipe[eurofinsbase]"
+  ]
+}

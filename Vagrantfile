@@ -3,6 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "opscode-ubuntu-14.04"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
    # if you are behing corporate firewall
    # step1: install vagrant-proxyconf plugin `$ vagrant plugin install vagrant-proxyconf
    # step2: uncomment below configuration
