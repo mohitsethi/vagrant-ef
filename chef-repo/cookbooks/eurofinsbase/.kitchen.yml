@@ -1,16 +1,27 @@
 ---
 driver:
   name: vagrant
+  customize:
+          memory: 2048
+          cpus: 1
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: ubuntu-14.04
+  -
+    driver_config:
+      box: ubuntu-1404-provisioner
+    name: ubuntu-14.04
+    driver_plugin: vagrant
   - name: centos-7.2
 
 suites:
   - name: default
+    run_list:
+      - recipe[eurofinsbase::default]
+    attributes:
+  - name: suite_dc2
     run_list:
       - recipe[eurofinsbase::default]
     attributes:
